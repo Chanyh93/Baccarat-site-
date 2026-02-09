@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>百家樂胜率计算器</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#111;
+            color:white;
+            text-align:center;
+        }
+
+        h1{
+            color:gold;
+        }
+
+        input,button{
+            padding:10px;
+            font-size:16px;
+            margin:5px;
+        }
+
+        #result{
+            margin-top:20px;
+            font-size:18px;
+            line-height:1.6;
+        }
+
+        button{
+            background:gold;
+            border:none;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:orange;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <h1>🎰 百家樂胜率模拟器</h1>
+
+    <p>输入模拟次数：</p>
+
+    <input id="times" type="number" value="100000">
+
+    <br>
+
+    <button onclick="start()">开始模拟</button>
+
+    <div id="result"></div>
+
+
+<script>
+
+function createDeck(){
+
+    let deck = [];
+
+    for(let d=0; d<8; d++){
+
+        for(let i=1;i<=13;i++){
+
+            if(i>=10){
+                for(let k=0;k<4;k++){
+                    deck.push(0);
+                }
+            }
+            else{
+                for(let k=0;k<4;k++){
+                    deck.push(i);
+                }
+            }
+        }
+    }
+
+    return deck;
+}
+
+
+function shuffle(arr){
+
+    for(let i=arr.length-1;i>0;i--){
+
+        let j = Math.floor(Math.random()*(i+1));
+
+        [arr[i],arr[j]] = [arr[j],arr[i]];
+    }
+}
+
+
+function point(cards){
+
+    return cards.reduce((a,b)=>a+b,0)%10;
+}
+
+
+function playerDraw(p){
+
+    return p<=5;
+}
+
+
+function bankerDraw(b,p3){
+
+    if(p3==null) return b<=5;
+
+    if(b<=2) return true;
+    if(b==3 && p3!=8) return true;
+    if(b==4 && p3>=2 && p3<=7) return true;
+    if(b==5 && p3>=4 && p3<=7) return true;
+    if(b==6 && (p3==6||p3==7)) return true;
+
+    return false;
+}
+
+
+
+function play(){
+
+    let deck = createDeck();
+
+    shuffle(deck);
+
+    let player = [deck.pop(),deck.pop()];
+    let banker = [deck.pop(),deck.pop()];
+
+    let p = point(player);
+    let b = point(banker);
+
+    if(p>=8||b>=8){
+        return [p,b];
+    }
+
+    let p3 = null;
+
+    if(playerDraw(p)){
+        p3 = deck.pop();
+        player.push(p3);
+        p = point(player);
+    }
+
+    if(bankerDraw(b,p3)){
+        banker.push(deck.pop());
+        b = point(banker);
+    }
+
+    return [p,b];
+}
+
+
+
+function start(){
+
+    let times = Number(document.getElementById("times").value);
+
+    if(times<1000){
+        alert("次数太少！");
+        return;
+    }
+
+    let pw=0,bw=0,tie=0;
+
+    document.getElementById("result").innerHTML="计算中...";
+
+    setTimeout(()=>{
+
+        for(let i=0;i<times;i++){
+
+            let [p,b] = play();
+
+            if(p>b) pw++;
+            else if(b>p) bw++;
+            else tie++;
+        }
+
+        let res = `
+        模拟次数：${times}<br><br>
+
+        閒胜率：${(pw/times*100).toFixed(2)}%<br>
+        莊胜率：${(bw/times*100).toFixed(2)}%<br>
+        和局率：${(tie/times*100).toFixed(2)}%
+        `;
+
+        document.getElementById("result").innerHTML = res;
+
+    },50);
+}
+
+</script>
+
+
+</body>
+</html>
