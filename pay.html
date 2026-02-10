@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>BacWin AI - 开通会员</title>
+  <style>
+    body{margin:0;font-family:Arial;background:#0b0f1a;color:#fff;text-align:center;}
+    header{background:linear-gradient(90deg,#f5c542,#ff8c00);color:#000;padding:26px 12px;}
+    section{max-width:900px;margin:0 auto;padding:22px 14px;}
+    .card{background:#141a2a;border-radius:12px;padding:18px;margin:12px 0;}
+    .btn{background:gold;color:#000;padding:12px 18px;border:none;border-radius:8px;font-size:16px;cursor:pointer;}
+    .btn:hover{background:orange;}
+    .qr{display:inline-block;background:#0f1422;border-radius:12px;padding:10px;margin:8px;}
+    .qr img{width:220px;height:220px;object-fit:cover;border-radius:10px;background:#0b0f1a;}
+    .muted{color:#aab; font-size:13px; line-height:1.5;}
+    a{color:#ffcc00}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💎 BacWin AI 会员开通</h1>
+    <p>数据模拟与分析工具｜不保证盈利｜仅供参考</p>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>价格</h2>
+      <p>月卡：RM29 ｜ 年卡：RM99 ｜ VIP：RM199</p>
+      <p class="muted">建议：先月卡试用，满意再升级年卡</p>
+    </div>
+
+    <div class="card">
+      <h2>付款方式</h2>
+      <div class="qr">
+        <div>DuitNow</div>
+        <!-- 你可以把 duitnow.png 上传到仓库，然后改成 src="duitnow.png" -->
+        <img src="" alt="DuitNow QR（上传后显示）">
+      </div>
+      <div class="qr">
+        <div>Touch'n Go</div>
+        <!-- 你可以把 tng.png 上传到仓库，然后改成 src="tng.png" -->
+        <img src="" alt="TNG QR（上传后显示）">
+      </div>
+
+      <p class="muted">
+        没有二维码也没关系：先用你现有的转账方式收款，后面再补二维码图片。
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>开通步骤（3步）</h2>
+      <p>1) 完成转账</p>
+      <p>2) 截图付款记录（金额 + 时间）</p>
+      <p>3) 点击下方按钮联系 TG，1-5分钟内发放 VIP 码</p>
+      <button class="btn" onclick="window.open('https://t.me/你的TG用户名')">付款后联系 TG 获取 VIP 码</button>
+      <p class="muted" style="margin-top:10px;">
+        说明：本服务提供数据模拟/统计工具，不提供保证盈利/代操/投注建议。
+      </p>
+    </div>
+
+    <div class="card">
+      <button class="btn" onclick="window.location.href='./index.html'">返回首页</button>
+    </div>
+  </section>
+</body>
+</html>
