@@ -261,13 +261,19 @@ bp=point(b);
 return [pp,bp];
 }
 
+let isVIP = false;
 
+const vipList = [
+"BAC2026",
+"VIP888",
+"PRO999"
+];
 
 function start(){
 
 let t=Number(document.getElementById("times").value);
 
-if(t>20000){
+if(!isVIP && t>20000){
 alert("免费版最多 20000 次！");
 return;
 }
@@ -296,7 +302,19 @@ document.getElementById("result").innerHTML=`
 
 },50);
 }
+function unlock(){
 
+let code = document.getElementById("vip").value.trim();
+
+if(vipList.includes(code)){
+isVIP = true;
+alert("VIP解锁成功！");
+document.getElementById("limit").innerText="VIP模式：无限次数";
+}else{
+alert("无效VIP码");
+}
+
+}
 </script>
 
 </body>
